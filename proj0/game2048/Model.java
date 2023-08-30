@@ -106,6 +106,9 @@ public class Model extends Observable {
      *    value, then the leading two tiles in the direction of motion merge,
      *    and the trailing tile does not.
      * */
+
+    /** Note: row index of a board is from down to top
+     * */
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
@@ -118,30 +121,27 @@ public class Model extends Observable {
 
         int bs = board.size();
         for (int c=0; c<bs; c++) {
-            int lastRow = bs-1;
-            int lastRowValue = tile(c, lastRow)!=null ? tile(c, lastRow).value() : -1;
+            // nextRow: the row that element will be shifted, start from the 1st (up to down) row
+            int nextRow = bs-1;
+            int nextRowCurrValue = tile(c, nextRow)!=null ? tile(c, nextRow).value() : -1;
+
+            boolean isMerged = false;
+
             for (int r=bs-2; r>=0; r--) {
 
                 if (tile(c,r)==null) continue;
 
-                if (tile(c,r).value() == lastRowValue) {
-                    board.move(c, lastRow, tile(c,r));
+                if (!isMerged && tile(c,r).value() == nextRowCurrValue) {
+                    isMerged = board.move(c, nextRow, tile(c,r));
                     changed = true;
-                    this.score += 2*lastRowValue;
-                    lastRow -= 1;
-                    lastRowValue = -1;
+                    this.score += 2*nextRowCurrValue;
                 } else {
-                    if (tile(c,lastRow) == null) {
-                        board.move(c, lastRow, tile(c,r));
-                        lastRowValue = tile(c, lastRow).value();
-                    } else {
-                        board.move(c, lastRow-1, tile(c,r));
-                        lastRow -= 1;
-                        lastRowValue = tile(c, lastRow).value();
-                    }
+                    // two cases for nextRow arrangement
+                    nextRow = tile(c, nextRow)==null ? nextRow : nextRow-1;
+                    isMerged = board.move(c, nextRow, tile(c,r));
                     changed = true;
+                    nextRowCurrValue = tile(c, nextRow)!=null ? tile(c, nextRow).value() : -1;
                 }
-
             }
         }
 
