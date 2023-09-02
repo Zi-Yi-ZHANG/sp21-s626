@@ -10,14 +10,14 @@ public class IntListExercises {
      */
     public static void addConstant(IntList lst, int c) {
         IntList head = lst;
-        while (head.rest != null) {
+        while (head != null) {
             head.first += c;
             head = head.rest;
         }
     }
 
     /**
-     * Part B: Buggy method that sets node.first to zero if
+     * Part B: Buggy method that sets node. first to zero if
      * the max value in the list starting at node has the same
      * first and last digit, for every node in L
      *
@@ -51,7 +51,7 @@ public class IntListExercises {
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
         int lastDigit = x % 10;
-        while (x > 10) {
+        while (x >= 10) {
             x = x / 10;
         }
         int firstDigit = x % 10;
@@ -77,6 +77,11 @@ public class IntListExercises {
             lst.first *= lst.first;
         }
 
-        return currElemIsPrime || squarePrimes(lst.rest);
+        // if the first condition is true, the || operator will return true immediately and
+        // not bother to check the second condition
+        boolean restElemIsPrime = squarePrimes(lst.rest);
+
+        // return currElemIsPrime || squarePrimes(lst.rest);
+        return currElemIsPrime || restElemIsPrime;
     }
 }
