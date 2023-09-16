@@ -6,12 +6,14 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
-    private final double useRatio = 0.25;
+    private double useRatio;
 
     public ArrayDeque () {
+        T[] array = (T []) new Object[8];
         this.size = 0;
         this.nextFirst = 3;
         this.nextLast = 4;
+        this.useRatio = 0.25;
     }
 
 //    Helper function
