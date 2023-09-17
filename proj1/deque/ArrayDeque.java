@@ -16,13 +16,13 @@ public class ArrayDeque<T> {
         this.useRatio = 0.25;
     }
 
-//    Helper function
+//    Helper function: move the fromArray elements to the middle of the toArray
     private T[] moveArray(T[] fromArray, T[] toArray) {
         int first = (nextFirst + 1) % array.length;
         int last = (nextLast - 1 + array.length) % array.length;
 
 //        two cases: first == 0 or not
-        if (first < last) {
+        if (first <= last) {
             System.arraycopy(fromArray, first, toArray, toArray.length / 4, size);
         } else {
             System.arraycopy(fromArray, first, toArray, toArray.length / 4, fromArray.length - first);
@@ -34,7 +34,7 @@ public class ArrayDeque<T> {
         return toArray;
     }
 
-//    Helper function
+//    Helper function: shrink the array when its memory usage is lower than the useRatio
     private T[] shrinkArray(T[] array) {
         T[] newArray = (T[]) new Object[array.length / 2];
         return moveArray(array, newArray);

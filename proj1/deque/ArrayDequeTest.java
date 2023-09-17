@@ -1,10 +1,14 @@
 package deque;
 
+import jh61b.junit.In;
 import org.junit.Test;
+
+import java.lang.reflect.Array;
+
 import static org.junit.Assert.*;
 
 
-/** Performs some basic linked list tests. */
+/** Performs some basic Array list tests. */
 public class ArrayDequeTest {
 
     @Test
@@ -81,7 +85,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    /* Check if you can create LinkedListDeques with different parameterized types*/
+    /* Check if you can create ArrayDeques with different parameterized types*/
     public void multipleParamTest() {
 
 
@@ -100,7 +104,7 @@ public class ArrayDequeTest {
     }
 
     @Test
-    /* check if null is return when removing from an empty LinkedListDeque. */
+    /* check if null is return when removing from an empty ArrayDeque. */
     public void emptyNullReturnTest() {
 
 //        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
@@ -133,5 +137,29 @@ public class ArrayDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+    }
+
+    @Test
+    /* AD-basic: fill up, empty, fill up again. */
+    public void fillUpTwice() {
+
+        ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 8; i++) {
+            lld1.addLast(i);
+        }
+        assertEquals("Should have 8 elements", 8, lld1.size());
+
+        for (int i = 0; i < 8; i++) {
+            assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            lld1.addLast(i);
+        }
+        assertEquals("Should have 8 elements", 8, lld1.size());
+
+        System.out.println("Printing out deque: ");
+        lld1.printDeque();
+
     }
 }
