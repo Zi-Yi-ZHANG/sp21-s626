@@ -8,6 +8,9 @@ public class Flik {
      *  @param b Value 2
      *  @return Whether a and b are the same */
     public static boolean isSameNumber(Integer a, Integer b) {
-        return a == b;
+
+        // @Source: https://stackoverflow.com/questions/1700081/why-is-128-128-false-but-127-127-is-true-when-comparing-integer-wrappers-in-ja
+        // return a == b;
+        return a.equals(b);
     }
 }
