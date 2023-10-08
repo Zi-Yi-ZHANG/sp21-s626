@@ -2,6 +2,7 @@ package deque;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 /** Performs some basic linked list tests. */
@@ -135,5 +136,39 @@ public class LinkedListDequeTest {
         }
 
 
+    }
+
+    @Test
+    /* Check if the foreach loop works */
+    public void forEachLoopTest() {
+
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+
+        int num = 0;
+        for (int e : lld1) {
+            assertEquals(e, num);
+            num += 1;
+            System.out.print(e + "->");
+        }
+        System.out.print("null");
+    }
+
+    @Test
+    /* Check the if the equal method works correctly */
+    public void equalsTest() {
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+        for (int j = 9; j >= 0; j--) {
+            lld2.addFirst(j);
+        }
+
+        assertTrue(lld1.equals(lld2));
     }
 }

@@ -1,9 +1,6 @@
 package deque;
 
-import jh61b.junit.In;
 import org.junit.Test;
-
-import java.lang.reflect.Array;
 
 import static org.junit.Assert.*;
 
@@ -161,5 +158,39 @@ public class ArrayDequeTest {
         System.out.println("Printing out deque: ");
         lld1.printDeque();
 
+    }
+
+    @Test
+    /* Check if the foreach loop works */
+    public void forEachLoopTest() {
+
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+
+        int num = 0;
+        for (int e : lld1) {
+            assertEquals(e, num);
+            num += 1;
+            System.out.print(e + "->");
+        }
+        System.out.print("null");
+    }
+
+    @Test
+    /* Check the if the equal method works correctly */
+    public void equalsTest() {
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld1.addLast(i);
+        }
+
+        ArrayDeque<Integer> lld2 = new ArrayDeque<>();
+        for (int j = 9; j >= 0; j--) {
+            lld2.addFirst(j);
+        }
+
+        assertTrue(lld1.equals(lld2));
     }
 }
